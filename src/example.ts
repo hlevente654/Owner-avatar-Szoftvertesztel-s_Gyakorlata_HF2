@@ -6,11 +6,22 @@ export function hello(people: string[]): string {
   const normalGreetings: string[] = [];
 
   for (const person of people) {
+    if (person.includes(',')) {
+      const names = person.split(',');
+      for (const name of names) {
+        if (name === name.toUpperCase()) {
+          shoutingGreetings.push(name);
+        } else {
+          normalGreetings.push(name);
+        }
+      }
+    } else {
     if (person === person.toUpperCase()) {
       shoutingGreetings.push(person);
     } else {
       normalGreetings.push(person);
     }
+  }
   }
 
   let normM = "";
@@ -31,5 +42,8 @@ export function hello(people: string[]): string {
   }
   const shoutingGreeting = shoutingGreetings.length === 0 ? '' : `HELLO ${boldM}!`;
 
-  return `${normalGreeting} ${shoutingGreeting}`.trim();
+  var eredmeny = `${normalGreeting} ${shoutingGreeting}`.trim();
+  eredmeny = eredmeny.replace(/  +/g, ' ');
+
+  return eredmeny;
 }
